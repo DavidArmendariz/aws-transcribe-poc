@@ -41,11 +41,10 @@ export class Streamer {
         if (event.TranscriptEvent?.Transcript) {
           const results = event.TranscriptEvent.Transcript.Results;
           if (results) {
-            if (results.length && !results[0]?.IsPartial) {
+            if (results.length) {
               const alternatives = results[0].Alternatives;
               if (alternatives && alternatives[0]) {
                 const transcript = alternatives[0].Transcript;
-                console.log(transcript);
                 this.callback(transcript + " ");
               }
             }
