@@ -15,11 +15,20 @@ export class Streamer {
   constructor() {
     this.language = LanguageCode.ES_ES;
     this.transcriber = new Transcriber();
-    this.callback = () => {};
+    this.recorder = undefined;
+    this.callback = (transcript: string) => {
+      console.log(transcript);
+    };
+    console.log("Streamer initialized");
+  }
+
+  setCallback(callback: (transcript: string) => void) {
+    this.callback = callback;
   }
 
   async startStreaming() {
     this.recorder = new Recorder();
+    await this.recorder.setMicrophoneStream();
     const command = new StartStreamTranscriptionCommand({
       LanguageCode: this.language,
       MediaEncoding: "pcm",
@@ -55,7 +64,7 @@ export class Streamer {
   }
 
   async startRecording() {
-    if (this.recorder || this.transcriber) {
+    if (this.recorder) {
       this.stopRecording();
     }
     await this.startStreaming();

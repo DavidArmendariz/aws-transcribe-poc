@@ -1,35 +1,75 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { Streamer } from "./utils/streamer";
 
-function App() {
-  const [count, setCount] = useState(0)
+const streamer = new Streamer();
+
+const App = () => {
+  const [isRecording, setIsRecording] = useState(false);
+  const [transcriptText, setTranscriptText] = useState("");
+
+  const handleStartRecording = () => {
+    setIsRecording(true);
+    streamer.setCallback(setTranscriptText);
+    streamer.startRecording();
+  };
+
+  const handleStopRecording = () => {
+    setIsRecording(false);
+    streamer.stopRecording();
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="flex flex-col p-6 max-w-lg mx-auto">
+      <h2 className="text-2xl font-bold mb-4">DeltaWits Transcriber</h2>
 
-export default App
+      <div className="flex gap-4 mb-4">
+        <button
+          onClick={handleStartRecording}
+          disabled={isRecording}
+          className={`px-4 py-2 rounded-md ${
+            isRecording
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-green-500 hover:bg-green-600 text-white"
+          }`}
+        >
+          Comenzar grabación
+        </button>
+
+        <button
+          onClick={handleStopRecording}
+          disabled={!isRecording}
+          className={`px-4 py-2 rounded-md ${
+            !isRecording
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-red-500 hover:bg-red-600 text-white"
+          }`}
+        >
+          Parar grabación
+        </button>
+      </div>
+
+      <div className="relative">
+        {isRecording && (
+          <div className="absolute top-2 right-2">
+            <span className="flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+            </span>
+          </div>
+        )}
+        <textarea
+          className="w-full h-40 p-3 border border-gray-300 rounded-md"
+          placeholder="El transcript aparecerá aquí..."
+          value={transcriptText}
+          readOnly
+        ></textarea>
+      </div>
+
+      <div className="mt-2 text-sm text-gray-500">
+        {isRecording ? "Grabación en proceso" : "Listo para grabar"}
+      </div>
+    </div>
+  );
+};
+
+export default App;

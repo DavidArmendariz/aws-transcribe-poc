@@ -10,7 +10,7 @@ export class Recorder {
     this.microphoneStream = new MicrophoneStream();
   }
 
-  async buildMicrophoneStream() {
+  async setMicrophoneStream() {
     this.microphoneStream.setStream(
       await window.navigator.mediaDevices.getUserMedia({
         video: false,
