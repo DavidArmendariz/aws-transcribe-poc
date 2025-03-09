@@ -40,8 +40,10 @@ const App = () => {
         messages: [
           {
             role: "system",
-            content:
-              "Eres un asistente médico. Tu tarea es identificar el motivo de la consulta del paciente",
+            content: `Eres un asistente médico.
+              Tu tarea es identificar el motivo de la consulta del paciente.
+              Solo identifica la enfermedad, afección, dolencia o padecimiento.
+              Es decir, no escribas una oración completa sino solo el motivo de la consulta.`,
           },
           {
             role: "user",
