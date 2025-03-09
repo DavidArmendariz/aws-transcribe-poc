@@ -18,6 +18,10 @@ const App = () => {
     streamer.stopRecording();
   };
 
+  const handleClearTranscript = () => {
+    streamer.clearTranscript();
+  };
+
   return (
     <div className="flex flex-col p-6 max-w-lg mx-auto">
       <h2 className="text-2xl font-bold mb-4">DeltaWits Transcriber</h2>
@@ -28,7 +32,7 @@ const App = () => {
           disabled={isRecording}
           className={`px-4 py-2 rounded-md ${
             isRecording
-              ? "bg-gray-300 cursor-not-allowed"
+              ? "bg-gray-400 text-gray-700 cursor-not-allowed border-gray-400 pointer-events-none"
               : "bg-green-500 hover:bg-green-600 text-white"
           }`}
         >
@@ -40,11 +44,23 @@ const App = () => {
           disabled={!isRecording}
           className={`px-4 py-2 rounded-md ${
             !isRecording
-              ? "bg-gray-300 cursor-not-allowed"
+              ? "bg-gray-400 text-gray-700 cursor-not-allowed border-gray-400 pointer-events-none"
               : "bg-red-500 hover:bg-red-600 text-white"
           }`}
         >
           Parar grabación
+        </button>
+
+        <button
+          onClick={handleClearTranscript}
+          disabled={isRecording}
+          className={`px-4 py-2 rounded-md ${
+            isRecording
+              ? "bg-gray-400 text-gray-700 cursor-not-allowed border-gray-400 pointer-events-none"
+              : "bg-blue-500 hover:bg-blue-600 text-white"
+          }`}
+        >
+          Limpiar texto
         </button>
       </div>
 
