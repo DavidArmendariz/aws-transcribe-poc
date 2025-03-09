@@ -14,6 +14,7 @@
     "@tailwindcss/vite": "^4.0.12",
     "buffer": "^6.0.3",
     "microphone-stream": "^6.0.1",
+    "openai": "^4.86.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.0.12",
