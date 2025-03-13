@@ -13,6 +13,12 @@ provider:
   name: aws
   runtime: python3.12
   region: us-east-2
+
+  # Configure deployment bucket to clean up old versions
+  deploymentBucket:
+    maxPreviousVersions: 1 # Keep only 1 previous version (in addition to the current one)
+    versioning: true # Enable versioning on the bucket
+
   iam:
     role:
       statements:
@@ -21,8 +27,8 @@ provider:
           Action:
             - "bedrock:InvokeModel"
           Resource:
-            # Use the correct ARN format for Bedrock models
             - "arn:aws:bedrock:us-east-2::foundation-model/anthropic.claude-3-5-haiku-20241022-v1:0"
+            - "arn:aws:bedrock:us-east-2:761018890099:inference-profile/us.anthropic.claude-3-5-haiku-20241022-v1:0"
 
 # Add package configuration to exclude files and directories
 package:
