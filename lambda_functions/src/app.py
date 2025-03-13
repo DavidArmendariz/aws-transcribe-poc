@@ -3,7 +3,7 @@ import json
 import boto3
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 
 load_dotenv()
 
@@ -23,7 +23,8 @@ def hello():
     model_id = "us.anthropic.claude-3-5-haiku-20241022-v1:0"
 
     # Define the prompt for the model.
-    prompt = "What is the capital of France?"
+    prompt = request.args.get('prompt', 'What is the capital of France?')
+
 
     # Format the request payload using the model's native structure.
     native_request = {
