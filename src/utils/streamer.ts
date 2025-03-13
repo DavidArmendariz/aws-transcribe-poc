@@ -8,14 +8,13 @@ import { Transcriber } from "./transcriber";
 
 export class Streamer {
   recorder: Recorder | undefined;
-  transcriber: Transcriber;
+  transcriber: Transcriber | undefined;
   language: LanguageCode;
   callback: (transcript: string) => void;
   fullTranscript: string;
 
   constructor() {
     this.language = LanguageCode.ES_ES;
-    this.transcriber = new Transcriber();
     this.recorder = undefined;
     this.fullTranscript = "";
     this.callback = (transcript: string) => {
@@ -24,11 +23,27 @@ export class Streamer {
     console.log("Streamer initialized");
   }
 
+  setTranscriber({
+    accessKeyId,
+    secretAccessKey,
+  }: {
+    accessKeyId: string;
+    secretAccessKey: string;
+  }) {
+    this.transcriber = new Transcriber({
+      accessKeyId,
+      secretAccessKey,
+    });
+  }
+
   setCallback(callback: (transcript: string) => void) {
     this.callback = callback;
   }
 
   async startStreaming() {
+    if (!this.transcriber) {
+      throw new Error("Transcriber not set");
+    }
     this.recorder = new Recorder();
     await this.recorder.setMicrophoneStream();
     const command = new StartStreamTranscriptionCommand({

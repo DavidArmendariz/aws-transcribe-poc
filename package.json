@@ -12,6 +12,7 @@
   "dependencies": {
     "@aws-sdk/client-transcribe-streaming": "^3.758.0",
     "@tailwindcss/vite": "^4.0.12",
+    "aws-amplify": "^6.13.4",
     "buffer": "^6.0.3",
     "microphone-stream": "^6.0.1",
     "openai": "^4.86.2",

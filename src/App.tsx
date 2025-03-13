@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Streamer } from "./utils/streamer";
 import OpenAI from "openai";
 import { OPENAI_API_KEY } from "./config";
+import { getAWSCredentials } from "./utils/credentials";
 
 const streamer = new Streamer();
 const openai = new OpenAI({
@@ -15,8 +16,14 @@ const App = () => {
   const [entity, setEntity] = useState("");
   const [isIdentifying, setIsIdentifying] = useState(false);
 
-  const handleStartRecording = () => {
+  const handleStartRecording = async () => {
     setIsRecording(true);
+    const credentials = await getAWSCredentials();
+    if (!credentials) {
+      return;
+    }
+    const { accessKeyId, secretAccessKey } = credentials;
+    streamer.setTranscriber({ accessKeyId, secretAccessKey });
     streamer.setCallback(setTranscriptText);
     streamer.startRecording();
   };
