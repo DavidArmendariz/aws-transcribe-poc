@@ -17,11 +17,6 @@ provider:
   runtime: python3.12
   region: us-east-2
 
-  # Configure deployment bucket to clean up old versions
-  deploymentBucket:
-    maxPreviousVersions: 1 # Keep only 1 previous version (in addition to the current one)
-    versioning: true # Enable versioning on the bucket
-
   iam:
     role:
       statements:
