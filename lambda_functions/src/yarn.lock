@@ -588,6 +588,13 @@ semver@^7.6.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.7.1.tgz#abd5098d82b18c6c81f6074ff2647fd3e7220c9f"
   integrity sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==
 
+serverless-prune-plugin@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/serverless-prune-plugin/-/serverless-prune-plugin-2.1.0.tgz#0067241482259315a89c849233f1b96e63efc0de"
+  integrity sha512-++22inpEFECgfw+DR2cRn8huxzcsQVgSii4Rjp5q6cPxKo2eKmFc0dfMaJ81DwQoHEnVhfVipIlGdodkauOm1g==
+  dependencies:
+    bluebird "^3.7.2"
+
 serverless-python-requirements@^6.1.0:
   version "6.1.2"
   resolved "https://registry.yarnpkg.com/serverless-python-requirements/-/serverless-python-requirements-6.1.2.tgz#21a222c06ac52736c969b60e251a7e2f606a6a33"

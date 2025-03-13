@@ -8,6 +8,9 @@ service: src
 custom:
   wsgi:
     app: app.app
+  prune:
+    automatic: true
+    number: 2
 
 provider:
   name: aws
@@ -56,3 +59,4 @@ functions:
 plugins:
   - serverless-wsgi
   - serverless-python-requirements
+  - serverless-prune-plugin
