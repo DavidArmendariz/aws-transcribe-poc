@@ -26,13 +26,16 @@ export class Streamer {
   setTranscriber({
     accessKeyId,
     secretAccessKey,
+    sessionToken,
   }: {
     accessKeyId: string;
     secretAccessKey: string;
+    sessionToken: string;
   }) {
     this.transcriber = new Transcriber({
       accessKeyId,
       secretAccessKey,
+      sessionToken,
     });
   }
 

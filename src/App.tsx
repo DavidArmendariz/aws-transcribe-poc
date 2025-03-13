@@ -22,8 +22,8 @@ const App = () => {
     if (!credentials) {
       return;
     }
-    const { accessKeyId, secretAccessKey } = credentials;
-    streamer.setTranscriber({ accessKeyId, secretAccessKey });
+    const { accessKeyId, secretAccessKey, sessionToken } = credentials;
+    streamer.setTranscriber({ accessKeyId, secretAccessKey, sessionToken });
     streamer.setCallback(setTranscriptText);
     streamer.startRecording();
   };
